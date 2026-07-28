@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TripMate AI - Agentic Travel Workspace</title>
+    
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Marked.js for Markdown & Table Rendering -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+    <div class="app-layout">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo-container">
+                    <i class="fa-solid fa-compass-drafting logo-icon"></i>
+                    <span class="logo-text">TripMate <span>AI</span></span>
+                </div>
+                <button class="new-chat-btn" onclick="startNewChat()">
+                    <i class="fa-solid fa-plus"></i> New Plan
+                </button>
+            </div>
+
+            <div class="sidebar-section">
+                <p class="section-title">AI Agents Active</p>
+                <div class="agent-badge"><i class="fa-solid fa-plane"></i> Flight Agent</div>
+                <div class="agent-badge"><i class="fa-solid fa-hotel"></i> Hotel Agent</div>
+                <div class="agent-badge"><i class="fa-solid fa-calendar-day"></i> Itinerary Agent</div>
+            </div>
+
+            <div class="sidebar-footer">
+                <div class="badge-pill"><i class="fa-solid fa-diagram-project"></i> LangGraph Engine</div>
+                <div class="badge-pill"><i class="fa-solid fa-bolt"></i> Groq LLaMA 3.3</div>
+            </div>
+        </aside>
+
+        <!-- Main Chat Area -->
+        <main class="main-content">
+            <!-- Header Bar -->
+            <header class="top-navbar">
+                <div class="nav-title">
+                    <h2>AI Travel Coordinator</h2>
+                    <span class="status-online"><span class="dot"></span> Active</span>
+                </div>
+            </header>
+
+            <!-- Chat Output Container -->
+            <div class="chat-viewport">
+                <!-- Welcome Banner -->
+                <div id="welcomeScreen" class="welcome-screen">
+                    <div class="hero-badge">✈️ Agentic AI Workspace</div>
+                    <h1>Where is your next adventure?</h1>
+                    <p>Describe your dream travel plan in natural language. Our multi-agent system will estimate flights, curate hotels, and structure day-wise itineraries.</p>
+                    
+                    <div class="prompt-chips">
+                        <button class="chip" onclick="usePrompt('Plan a 7-day family trip to Turkey with a budget of $2500 including historical places and local food.')">
+                            <i class="fa-solid fa-mosque"></i>
+                            <span>7 Days in Turkey</span>
+                            <small>$2500 • Family</small>
+                        </button>
+                        <button class="chip" onclick="usePrompt('Plan a 5-day romantic trip to Japan from Karachi with flight and hotel options.')">
+                            <i class="fa-solid fa-torii-gate"></i>
+                            <span>5 Days in Japan</span>
+                            <small>Romantic • Flights & Hotels</small>
+                        </button>
+                        <button class="chip" onclick="usePrompt('3-day budget solo trip to Dubai under $1000.')">
+                            <i class="fa-solid fa-city"></i>
+                            <span>3 Days in Dubai</span>
+                            <small>$1000 • Solo</small>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Messages Log -->
+                <div id="chatBox" class="chat-box"></div>
+
+                <!-- Loading Indicator -->
+                <div id="loadingIndicator" class="loading-card hidden">
+                    <div class="agent-spinner">
+                        <div class="spinner-ring"></div>
+                        <i class="fa-solid fa-plane-up spinner-icon"></i>
+                    </div>
+                    <div class="loading-info">
+                        <span id="agentStatus">Coordinating Agent Network...</span>
+                        <small>Querying Flights • Researching Hotels • Drafting Itinerary</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Input Floating Box -->
+            <div class="input-wrapper">
+                <form id="chatForm" onsubmit="handleSend(event)" class="input-card">
+                    <textarea 
+                        id="userInput" 
+                        placeholder="Ask TripMate AI (e.g., 'Plan a 5-day budget trip to Saudi Arabia in PKR')..." 
+                        rows="1" 
+                        required
+                        onkeydown="handleKeyDown(event)"></textarea>
+                    <button type="submit" id="sendBtn" title="Send Query">
+                        <i class="fa-solid fa-arrow-up"></i>
+                    </button>
+                </form>
+            </div>
+        </main>
+    </div>
+
+    <!-- Custom JS -->
+    <script src="/static/script.js"></script>
+</body>
+</html>
